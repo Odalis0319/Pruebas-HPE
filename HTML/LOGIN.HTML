@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Seguro</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar__content">
+            <div class="top-bar__logo-text">HPE</div>
+        </div>
+    </header>
+    <div class="background-design"></div>
+    <div class="particles-container" id="particles-container"></div>
+    <div class="login-container">
+        
+        <h1>NEXUSCORE DATA</h1>
+        
+        <div class="security-icon">
+            <img src="Sesion_icon.png" alt="Security Icon" class="security-icon-img">
+        </div>
+        
+        <div class="subtitle">Secure Server Access</div>
+
+        <form>
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <span class="input-icon">👤</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <span class="input-icon">🔒</span>
+                </div>
+            </div>
+
+            <button type="submit" class="login-button">
+                <span>LOGIN</span>
+            </button>
+        </form>
+        
+        <div class="footer-links">
+            <a href="#" class="link">Forgot Username/Password?</a>
+            <a href="#" class="link">Create Account</a>
+        </div>
+        
+    </div>
+
+    <script>
+        // Sistema de partículas dinámicas
+        class ParticleSystem {
+            constructor() {
+                this.container = document.getElementById('particles-container');
+                this.particles = [];
+                this.particleTypes = ['circle', 'star', 'diamond', 'line'];
+                this.sizes = ['small', 'medium', 'large'];
+                this.animations = ['floatUp', 'floatDown', 'floatLeft', 'floatRight', 'diagonal-up', 'diagonal-down', 'waveFloat', 'gentleDrift', 'organicFloat', 'butterflyMove'];
+                
+                this.init();
+            }
+
+            init() {
+                // Crear partículas iniciales
+                this.createInitialParticles();
+                
+                // Crear nuevas partículas periódicamente
+                setInterval(() => {
+                    this.createParticle();
+                }, 150); // Nueva partícula cada 150ms
+                
+                // Limpiar partículas que ya no son visibles
+                setInterval(() => {
+                    this.cleanupParticles();
+                }, 1000);
+            }
+
+            createInitialParticles() {
+                for (let i = 0; i < 80; i++) {
+                    this.createParticle();
+                }
+            }
+
+            createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Tipo aleatorio
+                const type = this.particleTypes[Math.floor(Math.random() * this.particleTypes.length)];
+                particle.classList.add(type);
+                
+                // Tamaño aleatorio
+                const size = this.sizes[Math.floor(Math.random() * this.sizes.length)];
+                particle.classList.add(size);
+                
+                // Posición inicial aleatoria para distribuir por toda la pantalla
+                const startX = Math.random() * window.innerWidth;
+                const startY = Math.random() * window.innerHeight;
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
+                
+                // Animación aleatoria - garantizar que siempre tenga movimiento
+                const animation = this.animations[Math.floor(Math.random() * this.animations.length)];
+                particle.classList.add(animation);
+                
+                // Duración de animación aleatoria - más rápida para evitar trabas
+                const duration = 8 + Math.random() * 12; // Entre 8 y 20 segundos
+                particle.style.animationDuration = duration + 's';
+                
+                // Delay aleatorio más corto
+                const delay = Math.random() * 2;
+                particle.style.animationDelay = delay + 's';
+                
+                // Forzar que la animación sea continua y fluida
+                particle.style.animationTimingFunction = 'linear';
+                particle.style.animationIterationCount = '1';
+                particle.style.animationFillMode = 'both';
+                
+                // Color aleatorio para algunos tipos
+                if (type === 'circle') {
+                    const colors = [
+                        'rgba(255, 255, 255, 0.6)',
+                        'rgba(0, 212, 255, 0.5)',
+                        'rgba(139, 92, 246, 0.4)',
+                        'rgba(168, 85, 247, 0.5)'
+                    ];
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                }
+                
+                this.container.appendChild(particle);
+                this.particles.push(particle);
+                
+                // Verificar que la partícula tenga animación después de un breve delay
+                setTimeout(() => {
+                    const computedStyle = window.getComputedStyle(particle);
+                    const animationName = computedStyle.animationName;
+                    if (animationName === 'none' || !animationName) {
+                        // Si no tiene animación, forzar una
+                        particle.style.animation = 'floatUp 10s linear infinite';
+                        particle.style.animationFillMode = 'both';
+                    }
+                }, 100);
+                
+                // Remover la partícula después de que termine su animación
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                    const index = this.particles.indexOf(particle);
+                    if (index > -1) {
+                        this.particles.splice(index, 1);
+                    }
+                }, (duration + delay) * 1000);
+            }
+
+            cleanupParticles() {
+                // Limpiar partículas más agresivamente para evitar trabas
+                this.particles = this.particles.filter(particle => {
+                    const rect = particle.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight + 200 && 
+                                    rect.bottom > -200 && 
+                                    rect.left < window.innerWidth + 200 && 
+                                    rect.right > -200;
+                    
+                    // Verificar si la partícula tiene animación
+                    const computedStyle = window.getComputedStyle(particle);
+                    const animationName = computedStyle.animationName;
+                    const hasAnimation = animationName && animationName !== 'none';
+                    
+                    if (!isVisible || !hasAnimation) {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                        return false;
+                    }
+                    return true;
+                });
+                
+                // Limitar el número máximo de partículas para evitar sobrecarga
+                if (this.particles.length > 100) {
+                    const excessParticles = this.particles.splice(0, this.particles.length - 80);
+                    excessParticles.forEach(particle => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    });
+                }
+            }
+        }
+
+        // Inicializar el sistema de partículas cuando la página esté cargada
+        document.addEventListener('DOMContentLoaded', () => {
+            new ParticleSystem();
+        });
+
+        // Recrear partículas cuando se redimensiona la ventana
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('particles-container');
+            if (container) {
+                container.innerHTML = '';
+                new ParticleSystem();
+            }
+        });
+    </script>
+
+</body>
+</html>
