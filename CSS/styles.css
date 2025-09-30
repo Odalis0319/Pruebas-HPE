@@ -760,7 +760,6 @@ h1 {
 /* Tablets grandes y pantallas medianas */
 @media (max-width: 1024px) {
     .login-container {
-        margin: 40px 20px;
         padding: 45px 35px;
         max-width: 90%;
     }
@@ -781,6 +780,10 @@ h1 {
 
 /* Tablets y pantallas medianas */
 @media (max-width: 768px) {
+    body {
+        padding-top: 70px; /* Ajusta el padding a la altura de la barra */
+    }
+
     .top-bar {
         height: 70px;
     }
@@ -843,7 +846,6 @@ h1 {
 /* Móviles grandes */
 @media (max-width: 640px) {
     .login-container {
-        margin: 15px;
         padding: 35px 25px;
         border-radius: 20px;
     }
@@ -870,6 +872,10 @@ h1 {
 
 /* Móviles pequeños */
 @media (max-width: 480px) {
+    body {
+        padding-top: 60px; /* Ajusta el padding a la altura de la barra */
+    }
+
     .top-bar {
         height: 60px;
     }
@@ -941,7 +947,6 @@ h1 {
 /* Móviles muy pequeños */
 @media (max-width: 360px) {
     .login-container {
-        margin: 8px;
         padding: 25px 15px;
         max-width: calc(100% - 16px);
     }
