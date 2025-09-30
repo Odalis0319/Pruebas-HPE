@@ -21,9 +21,11 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;                      /* Color de texto base */
     overflow-x: hidden; /* Evita scroll horizontal */
+    overflow: hidden; /* Evita cualquier scroll */
     width: 100%;
     height: 100vh; /* Altura fija de viewport */
-    padding-top: 80px; /* espacio para la barra superior fija */
+    padding-top: 80px; /* Espacio para la barra superior fija */
+    box-sizing: border-box; /* Incluye el padding en la altura total */
 }
 
 /* Animación del gradiente de fondo */
@@ -484,7 +486,6 @@ body {
     position: relative;
     transition: all 0.3s ease;
     overflow: hidden; /* Evita desbordamiento del contenido */
-    margin-top: 64px; /* separación con la barra superior */
 }
 
 .login-container:hover {
@@ -505,8 +506,8 @@ h1 {
 
 /* Icono de servidor mejorado */
 .security-icon {
-    font-size: 3.5em;
-    margin: 20px 0 30px 0;
+    font-size: 3em; /* Un poco más pequeño para reducir altura */
+    margin: 15px 0 20px 0; /* Margen vertical reducido */
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
     animation: pulse 3s ease-in-out infinite;
     opacity: 0.9;
@@ -530,14 +531,14 @@ h1 {
 .subtitle {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9em;
-    margin-bottom: 30px;
+    margin-bottom: 25px; /* Margen inferior reducido */
     font-weight: 300;
     letter-spacing: 1px;
 }
 
 /* Enlaces del footer */
 .footer-links {
-    margin-top: 30px;
+    margin-top: 25px; /* Margen superior reducido */
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -576,7 +577,7 @@ h1 {
 /* Estilos del Formulario y Campos */
 /* ---------------------------------- */
 .input-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* Espacio entre campos reducido */
     text-align: left;
     position: relative;
 }
@@ -637,7 +638,7 @@ h1 {
 .login-button {
     width: 100%;
     padding: 15px 25px;
-    margin-top: 30px;
+    margin-top: 25px; /* Espacio sobre el botón reducido */
     border: none;
     border-radius: 12px;
     font-size: 1.1em;
@@ -780,19 +781,13 @@ h1 {
 
 /* Tablets y pantallas medianas */
 @media (max-width: 768px) {
-    body {
-        padding-top: 70px;
-    }
-    
     .top-bar {
         height: 70px;
     }
     
     .login-container {
-        margin: 20px;
         padding: 40px 30px;
         max-width: 100%;
-        margin-top: 54px;
     }
     
     h1 {
@@ -875,20 +870,14 @@ h1 {
 
 /* Móviles pequeños */
 @media (max-width: 480px) {
-    body {
-        padding-top: 60px;
-    }
-    
     .top-bar {
         height: 60px;
     }
     
     .login-container {
-        margin: 10px;
         padding: 30px 20px;
         max-width: calc(100% - 20px);
         border-radius: 15px;
-        margin-top: 44px;
     }
     
     h1 {
