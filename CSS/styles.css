@@ -19,8 +19,7 @@ body {
     min-height: 100vh;
     margin: 0;                           /*tipo de altira del margen */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;                      /* Color de texto base */
-    overflow-x: hidden; /* Evita scroll horizontal */
+    color: white;                      /* Color de texto base */    
     overflow: hidden; /* Evita cualquier scroll */
     width: 100%;
     height: 100vh; /* Altura fija de viewport */
@@ -781,6 +780,7 @@ h1 {
 /* Tablets y pantallas medianas */
 @media (max-width: 768px) {
     body {
+        overflow-y: auto; /* Permite scroll vertical si es necesario */
         padding-top: 70px; /* Ajusta el padding a la altura de la barra */
     }
 
@@ -790,7 +790,8 @@ h1 {
     
     .login-container {
         padding: 40px 30px;
-        max-width: 100%;
+        max-width: 420px; /* Mantenemos un ancho máximo */
+        margin: 20px; /* Añadimos margen para que no toque los bordes */
     }
     
     h1 {
@@ -872,6 +873,7 @@ h1 {
 
 /* Móviles pequeños */
 @media (max-width: 480px) {
+    
     body {
         padding-top: 60px; /* Ajusta el padding a la altura de la barra */
     }
@@ -882,8 +884,8 @@ h1 {
     
     .login-container {
         padding: 30px 20px;
-        max-width: calc(100% - 20px);
         border-radius: 15px;
+        margin: 15px; /* Margen para que no toque los bordes */
     }
     
     h1 {
@@ -898,7 +900,7 @@ h1 {
     
     .security-icon {
         font-size: 2em;
-        margin: 10px 0 20px 0;
+        margin: 10px 0 15px 0; /* Reducimos margen vertical */
     }
     
     .input-group {
@@ -947,8 +949,8 @@ h1 {
 /* Móviles muy pequeños */
 @media (max-width: 360px) {
     .login-container {
-        padding: 25px 15px;
-        max-width: calc(100% - 16px);
+        padding: 20px 15px; /* Padding vertical reducido */
+        margin: 10px; /* Margen para que no toque los bordes */
     }
     
     h1 {
